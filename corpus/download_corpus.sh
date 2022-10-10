@@ -8,7 +8,7 @@ then
     echo 'JEMH already added as submodule'
 else
     echo 'JEMH not found as submodule. Adding now...'
-    git submodule add $REPO_URL
+    git submodule add --force $REPO_URL
 fi
 
 # update submodules recursively
