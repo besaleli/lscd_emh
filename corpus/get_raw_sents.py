@@ -4,6 +4,7 @@ import glob
 from tqdm.auto import tqdm
 from bs4 import BeautifulSoup
 import os
+from nltk.tokenize import sent_tokenize
 
 STREET_ADS_PATH = 'corpora/ephemera/street_ads/TEI/*.xml'
 BYP_PATH = 'corpora/projectbenyehuda/TEI/by-decades-accurate/*/*.xml'
@@ -27,7 +28,7 @@ def parse(filename: str, filetype: str, writer_id: int):
     elif filetype == 'byp':
         raw_sents = filter(lambda i: bool(i), 
                            map(lambda i: i.strip(),
-                               document.find('text').text.split('\n')))
+                               sent_tokenize(document.find('text').text)))
     else:
         raw_sents = None
         assert filetype in ['ephemera', 'byp']
