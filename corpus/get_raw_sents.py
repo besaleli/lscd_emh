@@ -5,12 +5,19 @@ from tqdm.auto import tqdm
 from bs4 import BeautifulSoup
 import os
 from nltk.tokenize import sent_tokenize
+import argparse
 
-STREET_ADS_PATH = 'corpora/ephemera/street_ads/TEI/*.xml'
-BYP_PATH = 'corpora/projectbenyehuda/TEI/by-decades-accurate/*/*.xml'
-TODIR = 'corpus/corpus_files'
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', '--corpus', help='Corpus Directory')
+parser.add_argument('-j', '--jemh', help='JEMH Directory')
 
-os.system(f'mkdir -p {TODIR}')
+args = parser.parse_args()
+
+STREET_ADS_PATH = f'{args.jemh}/ephemera/street_ads/TEI/*.xml'
+BYP_PATH = f'{args.jemh}/projectbenyehuda/TEI/by-decades-accurate/*/*.xml'
+TODIR = args.corpus
+
+# os.system(f'mkdir -p {TODIR}')
 
 # get street ads
 def parse(filename: str, filetype: str, writer_id: int):
